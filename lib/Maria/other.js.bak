@@ -1,0 +1,17 @@
+const prefix = global.prefa
+  const pushname = m.pushName || "No Name"
+
+const othermenu=`
+⌬${prefix}iguser
+⌬${prefix}sticker
+⌬${prefix}steal
+⌬${prefix}pornhub
+⌬${prefix}calculate
+⌬${prefix}emojimix
+⌬${prefix}tts
+⌬${prefix}ssweb
+⌬${prefix}runtime
+
+ `
+ module.exports = othermenu
+ 
