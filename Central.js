@@ -83,7 +83,8 @@ let banchat = JSON.parse(fs.readFileSync('./database/banChat.json'));
 let _limit = JSON.parse(fs.readFileSync('./storage/user/limit.json'));
 let _buruan = JSON.parse(fs.readFileSync('./storage/user/bounty.json'));
 let _darahOrg = JSON.parse(fs.readFileSync('./storage/user/blood.json'))
-
+let ntilinkfb =JSON.parse(fs.readFileSync('./database/antilink2.json'))
+let ntilinkall =JSON.parse(fs.readFileSync('./database/antilinkall.json'))
 let pendaftar = JSON.parse(fs.readFileSync('./storage/user/user.json'))
 let balance = JSON.parse(fs.readFileSync('./database/balance.json'))
 let ssewa = JSON.parse(fs.readFileSync('./database/sewa.json'))
@@ -335,6 +336,40 @@ if (AntiLinkAll)
         );
       } else {
       }
+      
+ if (AntiLinkFacebook)
+      var rondonxk = '[-a-zA-Z0-9@:%._+~#=].[-a-zA-Z0-9@:%._+~#=].[-a-zA-Z0-9()@:%_+.~#?&/=]'
+      if (budy.includes("https://")) {
+        if (!isBotAdmins) return
+        bvl = `\`\`\`「𝙇𝙞𝙣𝙠 𝙙𝙚𝙩𝙚𝙘𝙩𝙚𝙙   」\`\`\`\n\nLink sent by Admin so no action will be taken!`
+        if (isAdmins) return reply(bvl)
+        if (m.key.fromMe) return reply(bvl)
+        if (isCreator) return reply(bvl)
+        kice = m.sender
+        await Maria.sendMessage(
+          from,
+          {
+            delete: {
+              remoteJid: from,
+              fromMe: false,
+              id: m.id,
+              participant: m.sender,
+            },
+          },
+          {
+            quoted: m,
+          }
+        );
+      //  await Maria.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Maria.sendMessage(from, { text: `\`\`\`「  𝙇𝙞𝙣𝙠 𝙙𝙚𝙩𝙚𝙘𝙩𝙚𝙙    」\`\`\`\n\n*⚠️ Group link detected !*\n\n*🚫@${kice.split("@")[0]} You are not allowed to send any links in this group !*\n`, contextInfo: { mentionedJid: [kice] } }, { quoted: m })
+      } else {
+      }
+
+      if (command) {
+      Maria.sendMessage(from, { react: { text: "🚀" , key: m.key }})
+      }
+      if (!m.isGroup) return replay(mess.pm)
+      
       ///chat menu
 
 const pickRandom = (arr) => {
@@ -539,12 +574,79 @@ if (smallinput.includes(`thank you`)) {
 
 ///////////////////////////////////////////////////
     switch (command) {
-////////////////////////////////////////////////////
-      //General commands
+    	////////////////////////////////////////////////////
+      //chat bot 
       
-
-
-case 'chat':
+      case 'chatgpt': case 'gpt':{
+              if (isBan) return reply(mess.banned);
+              if (isBanChat) return reply(mess.bangc);
+            
+              if (!q) return reply(`Please provide a text query. Example: ${prefix + command} Hello, ChatGPT!`);
+            
+              const apiUrl1 = `https://vihangayt.me/tools/chatgpt?q=${encodeURIComponent(q)}`;
+              const apiUrl2 = `https://gurugpt.cyclic.app/gpt4?prompt=${encodeURIComponent(q)}&model=llama`;
+            
+              try {
+                
+                const response1 = await fetch(apiUrl1);
+                const responseData1 = await response1.json();
+            
+                if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.data) {
+                  
+                  const message = responseData1.data;
+                  const me = m.sender;
+                  await Maria.sendMessage(m.chat, { text: message, mentions: [me] }, { quoted: m });
+                } else {
+                  
+                  const response2 = await fetch(apiUrl2);
+                  const responseData2 = await response2.json();
+            
+                  if (response2.status === 200 && responseData2 && responseData2.data) {
+                    
+                    const message = responseData2.data;
+                    const me = m.sender;
+                    await Maria.sendMessage(m.chat, { text: message, mentions: [me] }, { quoted: m });
+                  } else {
+                    reply("Sorry, I couldn't fetch a response from both APIs at the moment.");
+                  }
+                }
+              } catch (error) {
+                console.error(error);
+                reply("An error occurred while fetching the response from both APIs.");
+              }
+            }
+              break;
+              case 'dalle': case 'imgai': {
+                if (isBan) return reply(mess.banned);
+                if (isBanChat) return reply(mess.bangc);
+              
+                if (!q) return reply(`Please provide a query to generate an image. Example: ${prefix + command} Beautiful landscape`);
+              
+                const apiUrl = `https://gurugpt.cyclic.app/dalle?prompt=${encodeURIComponent(q)}&model=art`;
+                //api source has ratelimit so may generate invalid results sometimes
+                try {
+                  
+                  const response = await fetch(apiUrl);
+              
+                  if (response.status === 200) {
+                    
+                    const imageUrls = await response.json();
+                  
+                    
+                    const randomImageUrl = imageUrls.result[Math.floor(Math.random() * imageUrls.result.length)];
+                 
+                    await Maria.sendMessage(m.chat, { image: { url: randomImageUrl } }, { quoted: m });
+                  } else {
+                    reply("Sorry, I couldn't generate an image at the moment.");
+                  }
+                } catch (error) {
+                  console.error(error);
+                  reply("An error occurred while generating the image.");
+                }
+              }
+                break; 
+            
+              case 'chat':
  
     const axios = require("axios");
 
@@ -556,29 +658,40 @@ case 'chat':
     m.reply(txtChatbot);
   
   break;
+    	
+    
+    ///script
+    
+
+////////////////////////////////////////////////////
+      //General commands
+      
+
+
+
       case "Maria": case "Maria-Md":
-            if (!m.isGroup) return replay(mess.pm)
+            
       const mariain= `⚡ *Maria-Md* ⚡\n\n🍀 *Description: A WhatsApp Bot With Rich NSFW features based on zero-two.*\n\n🌐 *OFFICIAL BOT URL: https://github.com/Ayush-pandey-u* \n\n 📒 *Guide: https://github.com/Ayush-pandey-u* \n\n 👾 *BOT URL:https://github.com/Ayush-pandey-u/Maria-Md* \n`
       Maria.sendMessage(from, { video: { url: 'https://media.tenor.com/videos/80f557139bc3a0857f6a705da6990fdc/mp4' }, gifPlayback: true, caption: mariain }, { quoted: m })
 
         break
       
       case "rules":
-      if (!m.isGroup) return replay(mess.pm)
+      
         const helptxt = `_*📍[Rules for Maria Md usage]📍*_\n\n\n*>>>* use -support to get the Official group link in your dm.\n\n*--->* If you want to add Maria-Md in your group the contact the owner by *-owner/-mods* \n\n*--->* Dont use wrong command, use the command given in the *-help* list \n\n* Dont spam the bot with commands if Maria-Md is not responding, its means the maybe owner is offline or facing internet issue. \n\n* Dont Dm the bot \n\n*IF YOU DONT FOLLOW THE RULES THEN YOU WILL BE BANNED* 🚫 \n\n\n*©️ Ayush Bots inc* `
 
         Maria.sendMessage(from, { video: { url: 'https://c.tenor.com/geMdtLCXZkAAAAPo/rules.mp4' }, gifPlayback: true, caption: helptxt }, { quoted: m })
 
         break
       case 'hii': case 'hi': case 'Hi':
-       if (!m.isGroup) return replay(mess.pm)
-        Maria.sendMessage(from, { react: { text: "❤" , key: m.key }})
+       
+        
         let txxt = `👋🏻 Hi *${pushname}*, i am  *Maria-Md*📍\nA whatsapp bot created by: Ayush and based on Maria  bot: FantoX001.\n\n I don't have time for chit-chat Darling. Use command from *${prefix}help* list if you want me to do anything.`
 
         Maria.sendMessage(m.chat, { video: { url: `https://c.tenor.com/4TLYvKWI2mgAAAPo/nakano-yotsuba-smile.mp4` }, caption: txxt, gifPlayback: true }, { quoted: m });
         break
       case "support":
-      if (!m.isGroup) return replay(mess.pm)
+      
         let tex = `📍My Developer's Group📍\n\n*🎇 𝐌𝐚𝐫𝐢𝐚 support group:🎇* *https://chat.whatsapp.com/FoS7pSPtfMqBuoireK4aAJ*`
 
         await Maria.sendMessage(m.sender, { text: `${tex}` },);
@@ -587,7 +700,7 @@ case 'chat':
         break
 
       case "info":
-            if (!m.isGroup) return replay(mess.pm)
+            
       let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
         let ifx = `🌟『𝕄𝕒𝕣𝕚𝕒-𝕄𝕕 』🌟
 *🌟Description:* A WhatsApp Bot With Rich  features based on Maria
@@ -600,7 +713,7 @@ case 'chat':
 Maria.sendMessage(m.chat, { video: { url: `https://media.tenor.com/VmwZnGeD0oEAAAPo/maria-naruse-shinmai-maou-no-testament.mp4` }, caption: ifx, gifPlayback: true }, { quoted: m });
         break
 case 'listgc': {
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
@@ -619,51 +732,96 @@ case 'listgc': {
  break
  
       case 'owner': case 'creator': case 'mod': case 'mods': {
-      if (!m.isGroup) return replay(mess.pm)
+      
         Maria.sendContact(m.chat, global.Owner, m)
       }
 
         break
       
       
+//script 
+case "sc": case "script":{
 
+   const scritxt = `*🚀𝑴𝒂𝒓𝒊𝒂-𝑩𝒐𝒕-𝑺𝒄𝒓𝒊𝒑𝒕🚀*\n
+  *🌟Creator:* 𝑨𝒚𝒖𝒔𝒉 𝒑𝒂𝒏𝒅𝒆𝒚\n
+  *🌟Repo:* 
+  *🌟Scan:* 
+  *🌟 Tutorial:* 
+
+
+
+
+©️ *Ayush Bots inc* `
+
+        Maria.sendMessage(from, { video: { url: 'https://media.tenor.com/Zco-fadJri4AAAPo/code-matrix.mp4' }, gifPlayback: true, caption: scritxt }, { quoted: m })
+}
+        break;
+        
  ///////////////////////////////////////////////////
  //Group menu
+ case 'antilink2': case 'antilinkmid': {
+    if (isBan) return reply(mess.banned)	 			
+ if (isBanChat) return reply(mess.bangc)
+ if (!m.isGroup) return replay(mess.grouponly)
+ if (!isBotAdmins) return replay(mess.botadmin)
+ if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (args[0] === "on") {
+if (AntiLinkFacebook) return reply('𝘼𝙡𝙧𝙚𝙖𝙙𝙮 𝙖𝙘𝙩𝙞𝙫𝙖𝙩𝙚𝙙')
+ntilinkfb.push(from)
+fs.writeFileSync('./database/antilink2.json', JSON.stringify(ntilinkfb))
+reply('𝐒𝐮𝐜𝐜𝐞𝐬𝐬 𝐢𝐧 𝐭𝐮𝐫𝐧𝐢𝐧𝐠 𝐨𝐧  𝐚𝐧𝐭𝐢𝐥𝐢𝐧𝐤2 𝐢𝐧 𝐭𝐡𝐢𝐬 𝐠𝐫𝐨𝐮𝐩')
+var groupe = await Maria.groupMetadata(from)
+var members = groupe['participants']
+var mems = []
+members.map(async adm => {
+mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
+})
+Maria.sendMessage(from, {text: `\`\`\`「 ⚠️𝗪𝗮𝗿𝗻𝗶𝗻𝗴⚠️ 」\`\`\`\n\n𝑰𝒇 𝒚𝒐𝒖'𝒓𝒆 𝒏𝒐𝒕 𝒂𝒏 𝒂𝒅𝒎𝒊𝒏, 𝒅𝒐𝒏'𝒕 𝒔𝒆𝒏𝒅 𝒕𝒉𝒆 𝒍𝒊𝒏𝒌 𝒊𝒏 𝒕𝒉𝒊𝒔 𝒈𝒓𝒐𝒖𝒑 𝒐𝒓 𝒘𝒆 𝒘𝒊𝒍𝒍 𝒃𝒆 𝒅𝒆𝒍𝒆𝒕𝒆 𝒊𝒕   𝒊𝒎𝒎𝒆𝒅𝒊𝒂𝒕𝒆𝒍𝒚!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+} else if (args[0] === "off") {
+if (!AntiLinkFacebook) return reply('𝘼𝙡𝙧𝙚𝙖𝙙𝙮 𝙙𝙚𝙖𝙘𝙩𝙞𝙫𝙖𝙩𝙚𝙙')
+let off = ntilinkfb.indexOf(from)
+ntilinkfb.splice(off, 1)
+fs.writeFileSync('./database/antilink2.json', JSON.stringify(ntilinkfb))
+reply('𝚂𝚞𝚌𝚌𝚎𝚜𝚜 𝚒𝚗 𝚝𝚞𝚛𝚗𝚒𝚗𝚐 𝚘𝚏𝚏 𝚊𝚗𝚝𝚒𝚕𝚒𝚗𝚔2 𝚒𝚗 𝚝𝚑𝚒𝚜 𝚐𝚛𝚘𝚞𝚙')
+} else {
+  await reply(`Please Type The Option\n\nExample: ${prefix + command} on\nExample: ${prefix + command} off\n\non to enable\noff to disable`)
+  }
+  }
+  break
+  
       case 'antilink': {
-          if (!m.isGroup) return replay(mess.pm)
+          
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
  if (!isBotAdmins) return replay(mess.botadmin)
  if (!isAdmins && !isCreator) return replay(mess.useradmin)
  if (args[0] === "on") {
- if (AntiLinkAll) return replay('Already activated')
- ntilinkall.push(from)
- replay('Enabled all antilink !')
- var groupe = await Maria.groupMetadata(from)
- var members = groupe['participants']
- var mems = []
- members.map(async adm => {
- mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
- })
- Maria.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
- } else if (args[0] === "off") {
- if (!AntiLinkAll) return replay('Already deactivated')
- let off = ntilinkall.indexOf(from)
- ntilinkall.splice(off, 1)
- replay('Disabled all antilink !')
- } else {
-   let textmsg = `❗️command:- *${command}*
-   🍁description:- Type -antilink on to turn on antilink feature or Type -antilink off to turn off antilink feature.
-  🔖Example:- ${prefix}${command} on` 
-     await Maria.sendMessage(m.chat, { text: `${textmsg}`}, `${global.BotName}`, m)
-   }
-   }
-    
-   break
+if (AntiLinkTwitter) return reply('Already activated')
+ntilinkall.push(from)
+fs.writeFileSync('./database/antilinkall.json', JSON.stringify(ntilinkall))
+reply('Success in turning on all antilink in this group')
+var groupe = await Maria.groupMetadata(from)
+var members = groupe['participants']
+var mems = []
+members.map(async adm => {
+mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
+})
+Maria.sendMessage(from, {text: `\`\`\`「 ⚠️Warning⚠️ 」\`\`\`\n\nIf you're not an admin, don't send any link in this group or u will be kicked immediately!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+} else if (args[0] === "off") {
+if (!AntiLinkAll) return reply('Already deactivated')
+let off = ntilinkall.indexOf(from)
+ntilinkall.splice(off, 1)
+fs.writeFileSync('./database/antilinkall.json', JSON.stringify(ntilinkall))
+reply('Success in turning off all antilink in this group')
+} else {
+  await reply(`Please Type The Option\n\nExample: ${prefix + command} on\nExample: ${prefix + command} off\n\non to enable\noff to disable`)
+  }
+  }
+  break
    
 case 'remove': {
-      if (!m.isGroup) return replay(mess.pm)
+      
         if (!m.isGroup) return replay(mess.grouponly)
         if (!isBotAdmins) return replay(mess.botadmin)
         if (!isAdmins && !isCreator) return replay(mess.useradmin)
@@ -682,7 +840,7 @@ case 'remove': {
     case 'resetgrouplink':
     case 'resetgclink':
     case 'resetgruplink': {
-          if (!m.isGroup) return replay(mess.pm)
+          
        if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
     if (!m.isGroup) return replay(mess.grouponly)
@@ -695,7 +853,7 @@ case 'remove': {
     case "gclink":
       case "grouplink":
         {
-              if (!m.isGroup) return replay(mess.pm)
+              
           if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -712,7 +870,7 @@ case 'remove': {
         break
         
 case 'listonline': case 'here':{
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -726,7 +884,7 @@ if (!isCreator) return replay(mess.botowner);
  break
  
  case 'tag': case 'tagall': case 'all':{
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -741,7 +899,7 @@ if (!isCreator) return replay(mess.botowner);
  }
  break
  case'admin': case 'tagadmin':{
-       if (!m.isGroup) return replay(mess.pm)
+       
     if (isBan) return reply(mess.banned)
     if (!isAdmins && !isCreator) return replay(mess.useradmin)	 			
  if (isBanChat) return reply(mess.bangc)
@@ -758,7 +916,7 @@ if (!isCreator) return replay(mess.botowner);
  break
  
 case 'hidetag': {
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -768,7 +926,7 @@ case 'hidetag': {
  break
  
  case 'promote': {
-       if (!m.isGroup) return replay(mess.pm)
+       
         if (isBan) return reply(mess.banned)	 			
      if (isBanChat) return reply(mess.bangc)
      if (!m.isGroup) return replay(mess.grouponly)
@@ -780,7 +938,7 @@ case 'hidetag': {
      break
 
      case 'demote': {
-           if (!m.isGroup) return replay(mess.pm)
+           
         if (isBan) return reply(mess.banned)	 			
      if (isBanChat) return reply(mess.bangc)
      if (!m.isGroup) return replay(mess.grouponly)
@@ -792,7 +950,7 @@ case 'hidetag': {
      break
      
      case 'setname': case 'setsubject': {
-           if (!m.isGroup) return replay(mess.pm)
+           
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -804,7 +962,7 @@ case 'hidetag': {
  break
  
  case 'setppgroup': case 'setgcpp': case 'setgrouppp': {
-       if (!m.isGroup) return replay(mess.pm)
+       
  if (!m.isGroup) return replay(mess.grouponly)
  if (!isBotAdmins) return replay(mess.botadmin)
  if (!isAdmins && !isCreator) return replay(mess.useradmin)
@@ -891,7 +1049,7 @@ case 'searchsticker':
   break;
 
       case 'weather':
-      if (!m.isGroup) return replay(mess.pm)
+      
         if (!args[0]) return reply("Enter your location to search weather.")
         myweather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(" ")}&units=metric&appid=e409825a497a0c894d2dd975542234b0&language=tr`)
 
@@ -902,7 +1060,7 @@ case 'searchsticker':
 
 
 case "coffee":
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned);
   if (isBanChat) return reply(mess.bangc);
   waifudhgd = await getBuffer(`https://coffee.alexflipnote.dev/random`);
@@ -938,7 +1096,7 @@ break
  ///////////////////////////////////////////////////
      //funmenu
      case 'handsomecheck': case'hc':
-        if (!m.isGroup) return replay(mess.pm)
+        
      if (isBan) return reply(mess.banned)
     if (isBanChat) return reply(mess.bangc)
 	
@@ -957,7 +1115,7 @@ Maria.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${teng}%
 Maria.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${tik}%*` }, { quoted: m })
 					break
 case 'ship':
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)
     if (isBanChat) return reply(mess.bangc)
 				if (!text) return replay(`Tag Someone, Example : ${prefix + command} @maria`)
@@ -970,7 +1128,7 @@ case 'gay':
 case 'playboy':
 case 'playgirl':
 case 'hot':{
-      if (!m.isGroup) return replay(mess.pm)
+      
 if (!m.isGroup) return m.reply(`${mess.group}`)
             let member = participants.map(u => u.id)
             let me = m.sender
@@ -989,7 +1147,7 @@ case 'kill': case 'pat': case 'lick': case 'kiss': case'hug': case 'bite':
 case 'bully': case 'bonk': case 'poke': case 'slap':
 case 'happy':
 case 'cuddle': case 'kick':{
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)	
@@ -1031,7 +1189,7 @@ case 'yeet':
 case 'wink': case 'smile':
 case 'wave': case 'blush': case 'smug': case 'glomp':
 case 'cringe': case 'highfive':{
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)	
@@ -1069,11 +1227,11 @@ break;
 
 
 case 'cry':  case 'handhold':{
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
-//Maria.sendMessage(from, { react: { text: "❤" , key: m.key }})
+//
 
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
 try {
@@ -1109,7 +1267,7 @@ break;
 
 
 case 'dance':{
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
@@ -1149,7 +1307,7 @@ break;
 
 //
  case 'dare':
-       if (!m.isGroup) return replay(mess.pm)
+       
     if (isBan) return reply(mess.banned)
     if (isBanChat) return reply(mess.bangc)
 	Maria.sendMessage(from, { react: { text: "ðŸŒ" , key: m.key }})
@@ -1244,7 +1402,7 @@ break;
                        
 
 case 'truth':
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)
     if (isBanChat) return reply(mess.bangc)
 	Maria.sendMessage(from, { react: { text: "ðŸŒ" , key: m.key }})
@@ -1345,50 +1503,94 @@ case 'truth':
                            Maria.sendMessage(from, { image: buffer, caption: '*You have chosen Truth*\n'+ Mariatruthww }, {quoted:m})
                            break
                            
-                           /* 
-Kindly Do not remove Creadit to Avoid the Bugs and error 
-*/
-/* 
-Search Shizo The Techie on Google for more info.
-This Code is made with ❤️ by Shizo The Techie for Maria-MD (Ayush) 
-*/
-
-case 'shayari': case 'sayari':
-
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
-
-let devsiz = await fetch(`https://shizoapi.cyclic.app/api/texts/shayari?apikey=shizo`)
-let syri = await devsiz.json()
-let shayari = `${syri.result}`
-reply(shayari)
-
-break
-
-
-case 'night': case 'raat':
-
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
-
-let devsizn = await fetch(`https://shizoapi.cyclic.app/api/texts/lovenight?apikey=shizo`)
-let nyt = await devsizn.json()
-let night = `${nyt.result}`
-reply(night)
-
-break
-
-
-case 'flirt': case 'flirting':
-
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
-
-let devsizf = await fetch(`https://shizoapi.cyclic.app/api/texts/flirt?apikey=shizo`)
-let flrt = await devsizf.json()
-let flirt = `${flrt.result}`
-reply(flirt)
-
+                           /* 
+
+Kindly Do not remove Creadit to Avoid the Bugs and error 
+
+*/
+
+/* 
+
+Search Shizo The Techie on Google for more info.
+
+This Code is made with ❤️ by Shizo The Techie for Maria-MD (Ayush) 
+
+*/
+
+
+
+case 'shayari': case 'sayari':
+
+
+
+if (isBan) return reply(mess.banned)
+
+if (isBanChat) return reply(mess.bangc)
+
+
+
+let devsiz = await fetch(`https://shizoapi.cyclic.app/api/texts/shayari?apikey=shizo`)
+
+let syri = await devsiz.json()
+
+let shayari = `${syri.result}`
+
+reply(shayari)
+
+
+
+break
+
+
+
+
+
+case 'night': case 'raat':
+
+
+
+if (isBan) return reply(mess.banned)
+
+if (isBanChat) return reply(mess.bangc)
+
+
+
+let devsizn = await fetch(`https://shizoapi.cyclic.app/api/texts/lovenight?apikey=shizo`)
+
+let nyt = await devsizn.json()
+
+let night = `${nyt.result}`
+
+reply(night)
+
+
+
+break
+
+
+
+
+
+case 'flirt': case 'flirting':
+
+
+
+if (isBan) return reply(mess.banned)
+
+if (isBanChat) return reply(mess.bangc)
+
+
+
+let devsizf = await fetch(`https://shizoapi.cyclic.app/api/texts/flirt?apikey=shizo`)
+
+let flrt = await devsizf.json()
+
+let flirt = `${flrt.result}`
+
+reply(flirt)
+
+
+
 break
     
                            
@@ -1402,7 +1604,7 @@ case 'fact': {
     break
     
     case 'iguser': {
-          if (!m.isGroup) return replay(mess.pm)
+          
      
 if (!args[0]) return reply(`Enter Instagram Username\n\nExample: ${prefix + command} Official_bhardwaj023`)
 const fg = require('api-dylux')
@@ -1426,7 +1628,7 @@ const fg = require('api-dylux')
 break
 
 case 'emojimix': {
-      if (!m.isGroup) return replay(mess.pm)
+      
 		let [emoji1, emoji2] = text.split`+`
 		if (!emoji1) return reply(`Example : ${prefix + command} 😅+🤔`)
 		if (!emoji2) return reply(`Example : ${prefix + command} 😅+🤔`)
@@ -1439,7 +1641,7 @@ case 'emojimix': {
 	    break
 	
 case 's': case 'sticker': case 'stiker': {
-   if (!m.isGroup) return replay(mess.pm)
+   
 if (!quoted) return reply(`Send/Reply Images/Videos/Gifs With Captions ${prefix+command}\nVideo Duration 1-9 Seconds`)
 
 if (/image/.test(mime)) {
@@ -1476,7 +1678,7 @@ break
     }
 
 case 'swm': case 'steal': case 'stickerwm': case 'take':{
-      if (!m.isGroup) return replay(mess.pm)
+      
 if (!args.join(" ")) return reply(`Where is the text?`)
 const swn = args.join(" ")
 const pcknm = swn.split("|")[0]
@@ -1497,7 +1699,7 @@ reply(`Photo/Video?`)
 }
 break
 case 'pornhub':{
-      if (!m.isGroup) return replay(mess.pm)
+      
 if(!q) return reply(`Example: ${prefix + command} ajg | ea`)
   inilogo4 = args.join(" ")
 inilogo9 = args.join(" ")
@@ -1510,7 +1712,7 @@ Maria.sendMessage(from,{image:{url:anuphub}, caption:"Created by Maria-Md"},{quo
 break
 
 case 'calculator': case 'cal': case 'calculate':{
-        if (!m.isGroup) return replay(mess.pm)
+        
     if (isBan) return reply(mess.banned)	 			
 if (isBanChat) return reply(mess.bangc)
 if (args.length < 1) return reply(`*Example :*\n${prefix}calculator 2*5\n\n`)
@@ -1526,7 +1728,7 @@ break
 
 
  case "tts":  case "texttospeech":  case "say": case "speak":{
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
 
@@ -1544,7 +1746,7 @@ break
     break
         
         case 'toimage': case 'toimg': {
-              if (!m.isGroup) return replay(mess.pm)
+              
    if (isBan) return reply(mess.banned)	 			
 if (isBanChat) return reply(mess.bangc)
 if (!m.quoted) return reply('Reply Image')
@@ -1563,7 +1765,7 @@ fs.unlinkSync(ran)
 break
 
 case 'togif': case 'getgif':{
-      if (!m.isGroup) return replay(mess.pm)
+      
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.quoted) return reply('Reply Image')
@@ -1578,14 +1780,14 @@ case 'togif': case 'getgif':{
  break
  
 case 'runtime': {
-      if (!m.isGroup) return replay(mess.pm)
+      
             	let lowq = `*The Bot Has Been Online For:*\n*${runtime(process.uptime())}*`
                 reply(lowq)
             	}
             break
             
       case 'ss': case 'ssweb': {
-            if (!m.isGroup) return replay(mess.pm)
+            
 if (!q) return replygcMaria(`Example ${prefix+command} link`)
 reply(mess.waiting)
 let krt = await scp1.ssweb(q)
@@ -1770,7 +1972,7 @@ if (!text) return reply(`Where is the text?\nExample: ${prefix + command} maria 
 ///////////////////////////////////////////////////
 // download menu
 case 'git': case 'gitclone':
-      if (!m.isGroup) return replay(mess.pm)
+      
 if (!args[0]) return reply(`Where is the link?\nExample :\n${prefix}${command} https://github.com/Ayush-pandey-u/Maria-Md`)
 if (!isUrl(args[0]) && !args[0].includes('github.com')) return reply(`Link invalid!!`)
 let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
@@ -1781,7 +1983,7 @@ let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
     Maria.sendMessage(m.chat, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => reply(mess.error))
 break
 case 'gdrive': {
-      if (!m.isGroup) return replay(mess.pm)
+      
 		if (!args[0]) return reply(`Enter the Google Drive link`)
 	const fg = require('api-dylux')
 	try {
@@ -1819,7 +2021,7 @@ case 'kill': case 'pat': case 'lick': case 'kiss': case 'bite':
 case 'bully': case 'bonk': case 'poke': case 'slap':
 case 'happy':
 case 'cuddle': case 'kick':{
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)	
@@ -1859,7 +2061,7 @@ break
 ///////////////////////////////////////////////////
 ///Weeb menu
 case 'waifu' :
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
@@ -1882,7 +2084,7 @@ break
 
 
 case 'neko' :
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
@@ -1905,7 +2107,7 @@ break
 
 
 case 'loli' :
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
@@ -1928,7 +2130,7 @@ break;
 case 'animewall2': 
 case 'animewallpaper2':
 case 'wallpaper':
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
@@ -1958,7 +2160,7 @@ var walb = [
 break
 
 case 'crossplay': case 'crosplay': case 'cosplay':
-      if (!m.isGroup) return replay(mess.pm)
+      
   if (isBan) return reply(mess.banned)	 			
   if (isBanChat) return reply(mess.bangc)
   if (!m.isGroup) return replay(mess.grouponly)
@@ -1986,14 +2188,14 @@ case 'crossplay': case 'crosplay': case 'cosplay':
 ///////////////////////////////////////////////////
 ////help menu
 case 'help':{
-      if (!m.isGroup) return replay(mess.pm)
+      
     const helpmenu = require("./lib/Maria/help.js")
         Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: helpmenu, gifPlayback: true }, { quoted: m });
         }
         break
 
 case 'list': case 'listmenu':{
-      if (!m.isGroup) return replay(mess.pm)
+      
 const listmenu = require("./lib/Maria/list.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: listmenu, gifPlayback: true }, { quoted: m });
@@ -2001,21 +2203,38 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
         
         case 'help': case 'menu':  {
-    if (!m.isGroup) return replay(mess.pm);
+    ;
     const helpmenu = require("./lib/Maria/help.js");
     Maria.sendMessage(m.chat, { video: { url: 'https://graph.org/file/b0b8add10f776322eb9b0.mp4' }, caption: helpmenu }, { quoted: m });
 }
 break;
 
 case 'list': case 'listmenu': {
-    if (!m.isGroup) return replay(mess.pm);
+    ;
     const listmenu = require("./lib/Maria/list.js");
     Maria.sendMessage(m.chat, { video: { url: 'https://graph.org/file/2a8f5e79a528704a58db7.mp4 ' }, caption: listmenu }, { quoted: m });
 }
 break;
+
+case 'help1': case 'h1':{
+      
+const h3menu = require("./lib/Maria/coding.js")
+
+Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h3menu, gifPlayback: true }, { quoted: m });
+        }
+        break
+  
+case 'help2': case 'h2':{
+      
+const h3menu = require("./lib/Maria/general.js")
+
+Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h3menu, gifPlayback: true }, { quoted: m });
+        }
+        break
+  
   
   case 'help3': case 'h3':{
-      if (!m.isGroup) return replay(mess.pm)
+      
 const h3menu = require("./lib/Maria/owner.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h3menu, gifPlayback: true }, { quoted: m });
@@ -2023,8 +2242,10 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
+  
+  
          case 'help4': case 'h4':{
-               if (!m.isGroup) return replay(mess.pm)
+               
 const h4menu = require("./lib/Maria/search.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h4menu, gifPlayback: true }, { quoted: m });
@@ -2033,7 +2254,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
          case 'help5': case 'h5':{
-               if (!m.isGroup) return replay(mess.pm)
+               
          
 const h5menu = require("./lib/Maria/group.js")
 
@@ -2043,7 +2264,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
          case 'help6' : case 'h6':{
-               if (!m.isGroup) return replay(mess.pm)
+               
 const h6menu = require("./lib/Maria/fun.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h6menu, gifPlayback: true }, { quoted: m });
@@ -2052,7 +2273,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
          case 'help7': case 'h8':{
-               if (!m.isGroup) return replay(mess.pm)
+               
 const h7menu = require("./lib/Maria/weeb.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h7menu, gifPlayback: true }, { quoted: m });
@@ -2061,7 +2282,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
          case 'help8': case 'h8':{
-               if (!m.isGroup) return replay(mess.pm)
+               
 const h8menu = require("./lib/Maria/audio.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h8menu, gifPlayback: true }, { quoted: m });
@@ -2070,7 +2291,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
          case 'help9': case 'h9' :{
-               if (!m.isGroup) return replay(mess.pm)
+               
 const h9menu = require("./lib/Maria/react.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h9menu, gifPlayback: true }, { quoted: m });
@@ -2079,7 +2300,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
          case 'help10': case 'h10':{
-               if (!m.isGroup) return replay(mess.pm)
+               
 const h10menu = require("./lib/Maria/other.js")
 
 Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h10menu, gifPlayback: true }, { quoted: m });
@@ -2163,7 +2384,9 @@ gifPlayback:true,
 break
  
  
-////test
+////script
+
+
 
             if(isCmd){
           if (isBan) return reply(mess.banned)	 			
