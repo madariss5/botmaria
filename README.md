@@ -37,7 +37,9 @@
 
 [![Maria-Bot](https://graph.org/file/296f51a3087f00a98d7a4.jpg)]([https://iwhahwhajajahqjahahauab-b3f2154865c8.herokuapp.com/](https://sleepy-cove-50902-bb33cab6890b.herokuapp.com/))
 
-   
+  
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/AYUSH-PANDEY023/Maria-Md/)
+ 
 
 ## ` BUILDPACKS`
 
@@ -49,8 +51,6 @@ https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
 https://github.com/clhuang/heroku-buildpack-webp-binaries.git
 
 ```
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Ayush-pandey-u/Maria-Md/)
 
 # Install Manually 👇
 
