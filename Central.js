@@ -2132,26 +2132,25 @@ reply(mess.waiting)
 break
 
 
-case 'loli' :
-      
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-reply(mess.waiting)	
-  waifuddd = await axios.get('https://waifu.pics/api/sfw/shinobu')
-/* var wbuttsssr = [
-  {buttonId: `${prefix}loli`, buttonText: {displayText: `>>`}, type: 1},
-  ] */
-      let buttonMessagessfgr = {
-      image: {url:waifuddd.data.url},
-      caption: 'Dont be a lolicon !',
-    /*  buttons: wbuttsssr,
-      headerType: 2 */
-       }     
-                                
-  await Maria.sendMessage(m.chat, buttonMessagessfgr, { quoted:m }).catch(err => {
-      return('error..')
-      })
+case 'loli':
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.banqc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  reply(mess.waiting);
+
+  waifuddd = await axios.get('https://waifu.pics/api/sfw/shinobu');
+
+  let buttonMessagessfgr = {
+    image: { url: waifuddd.data.url },
+    caption: 'Don't be a lolicon!',
+  };
+
+  await Maria.sendMessage(m.chat, buttonMessagessfgr, { quoted: m }).catch(err => {
+    console.error(err);
+  });
+
+  break;
+
 break;
 case 'animewall2': 
 case 'animewallpaper2':
