@@ -2142,14 +2142,14 @@ case 'loli':
 
   let buttonMessagessfgr = {
     image: { url: waifuddd.data.url },
-    caption: 'Don't be a lolicon!',
   };
 
   await Maria.sendMessage(m.chat, buttonMessagessfgr, { quoted: m }).catch(err => {
-    console.error(err);
+    console.error(err); // Log the error for debugging.
   });
 
   break;
+
 
 
 case 'animewall2': 
