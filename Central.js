@@ -2151,7 +2151,7 @@ case 'loli':
 
   break;
 
-break;
+
 case 'animewall2': 
 case 'animewallpaper2':
 case 'wallpaper':
