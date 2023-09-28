@@ -16,6 +16,7 @@ global.support = "https://chat.whatsapp.com/FoS7pSPtfMqBuoireK4aAJ"
 global.themeemoji = '🍭';
 global.packname = 'Maria';
 global.author = 'Ayush';
+global.wheather = 'b686686fb596410381b60356232809'; //change with your weather api key
 global.thum = fs.readFileSync("./Assets/pic7.jpg") 
 
 //   Prefix  //
