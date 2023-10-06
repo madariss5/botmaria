@@ -12,7 +12,7 @@ const {
   makeInMemoryStore,
   jidDecode,
   proto,
-} = require("@whiskeysockets/baileys");
+} = require("baileysjs");
 const pino = require("pino");
 const fs = require("fs");
 const chalk = require("chalk");
