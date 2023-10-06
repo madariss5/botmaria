@@ -33,18 +33,63 @@
 
    
 
-## `Scan QR Code For Session`
+<h2 align="center"> 🍁  Run Repl to get pairingCode 🍁
+</h2>
+<h2 align="center">  <a href="https://replit.com/@theofficialbhar/AYUSH-PAIRING"><img src="https://repl.it/badge/github/quiec/whatsasena" />
+</a>
+</h2>
 
-[![Maria-Bot](https://graph.org/file/296f51a3087f00a98d7a4.jpg)]([https://iwhahwhajajahqjahahauab-b3f2154865c8.herokuapp.com/](https://sleepy-cove-50902-bb33cab6890b.herokuapp.com/))
-
+# Deployment sites for Maria-MD
   
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/AYUSH-PANDEY023/Maria-Md/)
+<h2 align="center"> 🚩  Deploy On Codespace  🚩
+</h2>
+<h2 align="center">  <a href="https://github.com/codespaces/new"><img title="A17 on Gitub Codespace" src="https://img.shields.io/badge/DEPLOY CODESPACE-h?color=black&style=for-the-badge&logo=visualstudiocode" />
+</a>
+</h2>
+     
+   <br>
+  </br>
+
+
+  <h2 align="center"> ✨  Deploy On Mogenius  ✨
+</h2>
+<h2 align="center">  <a href="https://studio.mogenius.com/studio/cloud-space/cloud-space-overview"><img title="A17 on Mogenius" src="https://img.shields.io/badge/DEPLOY MOGENIUS-h?color=blue&style=for-the-badge&logo=genius"></a>
+</a>
+</h2>
+     
+    
+   <br>
+  </br>
+
+
+<h2 align="center"> 🍃  Deploy On Railway  🍃
+</h2>
+<h2 align="center">  <a href="https://railway.app/new"><img title="A17 on Railway"src="https://railway.app/button.svg" />
+</a>
+</h2>
+
+     
+
+   <br>
+   </br>
+
+
+<h2 align="center"> ❤  Deploy On Heroku  ❤
+</h2>
+
+<p align="center" >
+    <a href="https://heroku.com/deploy?template=https://github.com/Kai0071/A17">
+    <img title="A17 on Heroku" src="https://www.herokucdn.com/deploy/button.png" width="189px" alt="Deploy on Heroku" >
+    </a>
+</p>
+     
+
+
  
 
 ## ` BUILDPACKS`
 
 ```
-https://sleepy-cove-50902-bb33cab6890b.herokuapp.com/
 
 https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
 
@@ -110,6 +155,3 @@ npm i -g pm2 && pm2 start  index.js && pm2 save && pm2 logs
 
 ```
 
-# `base`
-
-- [`Miku-Md`]
