@@ -41,8 +41,8 @@
 
 # Deployment sites for Maria-MD
   
-<h2 align="center"> 🚩  Deploy On Codespace  🚩
-</h2>
+
+
 <h2 align="center">  <a href="https://github.com/codespaces/new"><img title="A17 on Gitub Codespace" src="https://img.shields.io/badge/DEPLOY CODESPACE-h?color=black&style=for-the-badge&logo=visualstudiocode" />
 </a>
 </h2>
@@ -51,8 +51,8 @@
   </br>
 
 
-  <h2 align="center"> ✨  Deploy On Mogenius  ✨
-</h2>
+  
+
 <h2 align="center">  <a href="https://studio.mogenius.com/studio/cloud-space/cloud-space-overview"><img title="A17 on Mogenius" src="https://img.shields.io/badge/DEPLOY MOGENIUS-h?color=blue&style=for-the-badge&logo=genius"></a>
 </a>
 </h2>
@@ -62,8 +62,7 @@
   </br>
 
 
-<h2 align="center"> 🍃  Deploy On Railway  🍃
-</h2>
+
 <h2 align="center">  <a href="https://railway.app/new"><img title="A17 on Railway"src="https://railway.app/button.svg" />
 </a>
 </h2>
@@ -74,8 +73,6 @@
    </br>
 
 
-<h2 align="center"> ❤  Deploy On Heroku  ❤
-</h2>
 
 <p align="center" >
     <a href="https://heroku.com/deploy?template=https://github.com/Kai0071/A17">
