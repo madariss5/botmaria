@@ -134,11 +134,11 @@ pkg install yarn
 
 pkg install imagemagick -y
 
-git clone https://github.com/Ayush-pandey-u/Maria-Md
+git clone https://github.com/AYUSH-PANDEY023/Maria-Md
 
 cd Maria-Md
 
-rm -rf auth_info_baileys
+rm -rf  Mystic Session
 
 node index.js
 
