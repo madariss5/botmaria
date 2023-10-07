@@ -43,39 +43,30 @@
   
 
 
-<h2 align="center">  <a href="https://github.com/codespaces/new"><img title="A17 on Gitub Codespace" src="https://img.shields.io/badge/DEPLOY CODESPACE-h?color=black&style=for-the-badge&logo=visualstudiocode" />
+<h2 align="center">  <a href="https://github.com/codespaces/new"><img title="Maria on Gitub Codespace" src="https://img.shields.io/badge/DEPLOY CODESPACE-h?color=black&style=for-the-badge&logo=visualstudiocode" />
 </a>
 </h2>
      
-   <br>
-  </br>
-
-
-  
-
-<h2 align="center">  <a href="https://studio.mogenius.com/studio/cloud-space/cloud-space-overview"><img title="A17 on Mogenius" src="https://img.shields.io/badge/DEPLOY MOGENIUS-h?color=blue&style=for-the-badge&logo=genius"></a>
+   
+<h2 align="center">  <a href="https://studio.mogenius.com/studio/cloud-space/cloud-space-overview"><img title="Maria on Mogenius" src="https://img.shields.io/badge/DEPLOY MOGENIUS-h?color=blue&style=for-the-badge&logo=genius"></a>
 </a>
 </h2>
      
     
-   <br>
-  </br>
+   
 
 
 
-<h2 align="center">  <a href="https://railway.app/new"><img title="A17 on Railway"src="https://railway.app/button.svg" />
-</a>
-</h2>
+
 
      
 
-   <br>
-   </br>
+   
 
 
 
 <p align="center" >
-    <a href="https://heroku.com/deploy?template=https://github.com/Kai0071/A17">
+    <a href="https://heroku.com/deploy?template=https://github.com/AYUSH-PANDEY023/Maria-Md">
     <img title="A17 on Heroku" src="https://www.herokucdn.com/deploy/button.png" width="189px" alt="Deploy on Heroku" >
     </a>
 </p>
