@@ -2212,7 +2212,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         }
         break
         
-        case 'help': case 'menu':  {
+         case 'menu':  {
     ;
     const helpmenu = require("./lib/Maria/help.js");
     Maria.sendMessage(m.chat, { video: { url: 'https://graph.org/file/b0b8add10f776322eb9b0.mp4' }, caption: helpmenu }, { quoted: m });
@@ -2226,15 +2226,9 @@ case 'list': case 'listmenu': {
 }
 break;
 
-case 'help1': case 'h1':{
-      
-const h3menu = require("./lib/Maria/coding.js")
 
-Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/623720.jpeg` }, caption: h3menu, gifPlayback: true }, { quoted: m });
-        }
-        break
   
-case 'help2': case 'h2':{
+case 'help1': case 'h1':{
       
 const h3menu = require("./lib/Maria/general.js")
 
@@ -2243,7 +2237,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-  case 'help3': case 'h3':{
+  case 'help2': case 'h2':{
       
 const h3menu = require("./lib/Maria/owner.js")
 
@@ -2254,7 +2248,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
   
   
   
-         case 'help4': case 'h4':{
+         case 'help3': case 'h3':{
                
 const h4menu = require("./lib/Maria/search.js")
 
@@ -2263,7 +2257,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-         case 'help5': case 'h5':{
+         case 'help4': case 'h4':{
                
          
 const h5menu = require("./lib/Maria/group.js")
@@ -2273,7 +2267,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-         case 'help6' : case 'h6':{
+         case 'help5' : case 'h5':{
                
 const h6menu = require("./lib/Maria/fun.js")
 
@@ -2282,7 +2276,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-         case 'help7': case 'h8':{
+         case 'help6': case 'h6':{
                
 const h7menu = require("./lib/Maria/weeb.js")
 
@@ -2291,7 +2285,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-         case 'help8': case 'h8':{
+         case 'help7': case 'h7':{
                
 const h8menu = require("./lib/Maria/audio.js")
 
@@ -2300,7 +2294,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-         case 'help9': case 'h9' :{
+         case 'help8': case 'h8' :{
                
 const h9menu = require("./lib/Maria/react.js")
 
@@ -2309,7 +2303,7 @@ Maria.sendMessage(m.chat, { image: { url: `https://picfiles.alphacoders.com/623/
         break
   
   
-         case 'help10': case 'h10':{
+         case 'help9': case 'h9':{
                
 const h10menu = require("./lib/Maria/other.js")
 
