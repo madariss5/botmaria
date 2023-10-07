@@ -309,34 +309,7 @@ module.exports = Maria = async (Maria, m, chatUpdate, store) => {
     }
   }
        
-if (AntiLinkAll)
-      if (budy.includes("https://")) {
-        if (!isBotAdmins) return;
-        bvl = `\`\`\`「 Link Detected 」\`\`\`\n\nAdmin has sent a link, admin is free to send any link😇`;
-        if (isAdmins) return m.reply(bvl);
-        if (m.key.fromMe) return m.reply(bvl);
-        if (isCreator) return m.reply(bvl);
-        await Maria.sendMessage(m.chat, {
-          delete: {
-            remoteJid: m.chat,
-            fromMe: false,
-            id: m.key.id,
-            participant: m.key.participant,
-          },
-        });
-        Maria.groupParticipantsUpdate(m.chat, [m.sender], "remove");
-        Maria.sendMessage(
-          from,
-          {
-            text: `\`\`\`「 Link Detected 」\`\`\`\n\n@${
-              m.sender.split("@")[0]
-            } Has been kicked because of sending link in this group`,
-            contextInfo: { mentionedJid: [m.sender] },
-          },
-          { quoted: m }
-        );
-      } else {
-      }
+
       
  if (AntiLinkFacebook)
       var rondonxk = '[-a-zA-Z0-9@:%._+~#=].[-a-zA-Z0-9@:%._+~#=].[-a-zA-Z0-9()@:%_+.~#?&/=]'
@@ -786,7 +759,7 @@ let repoInfo = await axios.get("https://api.github.com/repos/AYUSH-PANDEY023/Mar
         
  ///////////////////////////////////////////////////
  //Group menu
- case 'antilink2': case 'antilinkmid': {
+ case 'antilink': case 'antilinkmid': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -816,36 +789,8 @@ reply('𝚂𝚞𝚌𝚌𝚎𝚜𝚜 𝚒𝚗 𝚝𝚞𝚛𝚗𝚒𝚗𝚐 𝚘�
   }
   break
   
-      case 'antilink': {
+      
           
-    if (isBan) return reply(mess.banned)	 			
- if (isBanChat) return reply(mess.bangc)
- if (!m.isGroup) return replay(mess.grouponly)
- if (!isBotAdmins) return replay(mess.botadmin)
- if (!isAdmins && !isCreator) return replay(mess.useradmin)
- if (args[0] === "on") {
-if (AntiLinkTwitter) return reply('Already activated')
-ntilinkall.push(from)
-fs.writeFileSync('./database/antilinkall.json', JSON.stringify(ntilinkall))
-reply('Success in turning on all antilink in this group')
-var groupe = await Maria.groupMetadata(from)
-var members = groupe['participants']
-var mems = []
-members.map(async adm => {
-mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
-})
-Maria.sendMessage(from, {text: `\`\`\`「 ⚠️Warning⚠️ 」\`\`\`\n\nIf you're not an admin, don't send any link in this group or u will be kicked immediately!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
-} else if (args[0] === "off") {
-if (!AntiLinkAll) return reply('Already deactivated')
-let off = ntilinkall.indexOf(from)
-ntilinkall.splice(off, 1)
-fs.writeFileSync('./database/antilinkall.json', JSON.stringify(ntilinkall))
-reply('Success in turning off all antilink in this group')
-} else {
-  await reply(`Please Type The Option\n\nExample: ${prefix + command} on\nExample: ${prefix + command} off\n\non to enable\noff to disable`)
-  }
-  }
-  break
    
 case 'remove': {
       
@@ -1075,15 +1020,20 @@ case 'searchsticker':
   }
   break;
 
-      case 'weather':
-      
+   
+case 'weather':
+        if (isBan) return reply(mess.banned)	 			
+        if (isBanChat) return reply(mess.bangc)
         if (!args[0]) return reply("Enter your location to search weather.")
-        myweather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(" ")}&units=metric&appid=${wheat} &language=tr`)
+        myweather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(" ")}&units=metric&appid=e409825a497a0c894d2dd975542234b0&language=tr`)
 
-        const weathertext = `           🌤 *Weather Report* 🌤  \n\n🔎 *Search Location:* ${myweather.data.name}\n*💮 Country:* ${myweather.data.sys.country}\n🌈 *Weather:* ${myweather.data.weather[0].description}\n🌡️ *Temperature:* ${myweather.data.main.temp}°C\n❄️ *Minimum Temperature:* ${myweather.data.main.temp_min}°C\n📛 *Maximum Temperature:* ${myweather.data.main.temp_max}°C\n💦 *Humidity:* ${myweather.data.main.humidity}%\n🎐 *Wind:* ${myweather.data.wind.speed} km/h\n`
+        const weathertext = `           ⛅️ *Weather Report* ⛅️  \n\n 🔎*Search Location:* ${myweather.data.name}\n🌐Country:* ${myweather.data.sys.country}\n ☁️*Weather:* ${myweather.data.weather[0].description}\n🌡*Temperature:* ${myweather.data.main.temp}\n🌡 *Minimum Temperature:* ${myweather.data.main.temp_min}🌡\n *Maximum Temperature:* ${myweather.data.main.temp_max}\n❄️*Humidity:* ${myweather.data.main.humidity}%\n 🌪*Wind:* ${myweather.data.wind.speed} km/h\n`
         Maria.sendMessage(from, { video: { url: 'https://media.tenor.com/bC57J4v11UcAAAPo/weather-sunny.mp4' }, gifPlayback: true, caption: weathertext }, { quoted: m })
 
-        break
+        break;
+
+
+   
 
 
 case "coffee":
@@ -1117,6 +1067,40 @@ reply(teks)
 })
 }
 break
+		    
+case 'gimage':
+case 'gig':
+case 'googleimage': {
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
+  
+
+  if (!args[0]) return reply("Enter a search term to get Google Image!");
+  let gis = require('g-i-s');
+  gis(args.join(" "), async (error, result) => {
+    if (error) {
+      console.error(error);
+      return reply("Error occurred while searching for images.");
+    }
+
+    if (!result || result.length === 0) {
+      return reply("No images found for the given search term.");
+    }
+
+    n = result;
+    images = n[Math.floor(Math.random() * n.length)].url;
+    let buttonMessage = {
+      image: { url: images },
+      caption: `🔮 _Google Image Search_🔮 \n\n🧩_Search Term_ : ${text}\n🧩_Media Url_ : ${images}`,
+      footer: `${global.BotName}`,
+      headerType: 4,
+    };
+    Maria.sendMessage(m.chat, buttonMessage, { quoted: m });
+  });
+}
+break;
+
+
 
 
      
