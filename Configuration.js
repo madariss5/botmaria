@@ -20,7 +20,7 @@ global.wheather = 'b686686fb596410381b60356232809'; //change with your weather a
 global.thum = fs.readFileSync("./Assets/pic7.jpg") 
 
 //   Prefix  //
-global.prefa = ["!"];
+global.prefa = ["."];
 
 global.ntilinkytvid = []
 global.ntilinkytch = []
