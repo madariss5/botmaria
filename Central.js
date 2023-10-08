@@ -645,7 +645,7 @@ if (smallinput.includes(`thank you`)) {
 
       case "Maria": case "Maria-Md":
             
-      const mariain= `⚡ *Maria-Md* ⚡\n\n🍀 *Description: A WhatsApp Bot With Rich NSFW features based on zero-two.*\n\n🌐 *OFFICIAL BOT URL: https://github.com/Ayush-pandey-u* \n\n 📒 *Guide: https://github.com/Ayush-pandey-u* \n\n 👾 *BOT URL:https://github.com/Ayush-pandey-u/Maria-Md* \n`
+      const mariain= `⚡ *Maria-Md* ⚡\n\n🍀 *Description: A WhatsApp Bot With Rich NSFW features based on Chiku-MD.*\n\n🌐 *OFFICIAL Website: https://ayush-botz.vercel.app/* \n\n 📒 *Guide: https://github.com/AYUSH-PANDEY023/Guide* \n\n 👾 *BOT URL:https://github.com/AYUSH-PANDEY023/Maria-Md* \n`
       Maria.sendMessage(from, { video: { url: 'https://media.tenor.com/videos/80f557139bc3a0857f6a705da6990fdc/mp4' }, gifPlayback: true, caption: mariain }, { quoted: m })
 
         break
@@ -660,7 +660,7 @@ if (smallinput.includes(`thank you`)) {
       case 'hii': case 'hi': case 'Hi':
        
         
-        let txxt = `👋🏻 Hi *${pushname}*, i am  *Maria-Md*📍\nA whatsapp bot created by: Ayush and based on Maria  bot: FantoX001.\n\n I don't have time for chit-chat Darling. Use command from *${prefix}help* list if you want me to do anything.`
+        let txxt = `👋🏻 Hi *${pushname}*, i am  *Maria-Md*📍\nA whatsapp bot created by: Ayush and based on Chiku-MD bot\n\n I don't have time for chit-chat Darling. Use command from *${prefix}help* list if you want me to do anything.`
 
         Maria.sendMessage(m.chat, { video: { url: `https://c.tenor.com/4TLYvKWI2mgAAAPo/nakano-yotsuba-smile.mp4` }, caption: txxt, gifPlayback: true }, { quoted: m });
         break
@@ -747,8 +747,8 @@ let repoInfo = await axios.get("https://api.github.com/repos/AYUSH-PANDEY023/Mar
   *⭐ Total Stars:* ${repo.stargazers_count}\n
   *📁 Repo Size:* ${(repo.size/1024).toFixed(2)} MB\n
   *📅 Last Updated:* ${repo.updated_at}\n
-  *🌟 Scan:* 
-  *🌟 Tutorial:* 
+  *🌟 Scan:* https://replit.com/@theofficialbhar/AYUSH-PAIRING
+  *🌟 Tutorial:* https://youtu.be/wqc0LtA0abo?si=y0rMcmk11km63bZk
 
 ©️ *Ayush Bots inc* 
 *❝ Dont forget to give a Star ⭐ to the repo.*`
